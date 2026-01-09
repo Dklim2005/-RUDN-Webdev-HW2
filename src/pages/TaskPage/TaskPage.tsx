@@ -1,12 +1,14 @@
-import { Box, Typography, Button, Stack } from "@mui/material"
+import { Box, Typography, Button, Stack, Snackbar } from "@mui/material"
 import { useParams, useNavigate } from "react-router-dom"
 import { useQueryClient } from "@tanstack/react-query"
+import { useState } from "react"
 import type { Task } from "../../types/Task"
 
 function TaskPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const [open, setOpen] = useState(false)
 
   const tasks = queryClient.getQueryData<Task[]>(["todos"]) ?? []
   const task = tasks.find(t => t.id === Number(id))
@@ -21,6 +23,7 @@ function TaskPage() {
         t.id === task.id ? { ...t, status } : t
       )
     )
+    setOpen(true)
   }
 
   const removeTask = () => {
@@ -35,12 +38,15 @@ function TaskPage() {
       <Typography variant="h5" gutterBottom>
         #{task.id} {task.title}
       </Typography>
+
       <Typography sx={{ mb: 2 }}>
         {task.description || "Описание отсутствует"}
       </Typography>
+
       <Typography sx={{ mb: 1 }}>
         Дата создания: {task.createdAt.toString()}
       </Typography>
+
       <Typography sx={{ mb: 3 }}>
         Статус: {task.status}
       </Typography>
@@ -59,6 +65,13 @@ function TaskPage() {
           Удалить
         </Button>
       </Stack>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        onClose={() => setOpen(false)}
+        message="Статус задачи изменён"
+      />
     </Box>
   )
 }
