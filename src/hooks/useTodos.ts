@@ -6,5 +6,6 @@ export const useTodos = () => {
   return useQuery<Task[]>({
     queryKey: ["todos"],
     queryFn: fetchTodos,
+    staleTime: Infinity,
   })
 }
