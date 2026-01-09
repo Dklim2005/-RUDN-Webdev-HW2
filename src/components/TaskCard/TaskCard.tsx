@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, Box } from "@mui/material"
 import { useNavigate } from "react-router-dom"
-import { Task } from "../../types/Task"
+import type { Task } from "../../types/Task"
 
 type Props = {
   task: Task

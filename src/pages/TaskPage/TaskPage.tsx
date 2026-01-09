@@ -1,7 +1,7 @@
 import { Box, Typography, Button, Stack } from "@mui/material"
 import { useParams, useNavigate } from "react-router-dom"
 import { useQueryClient } from "@tanstack/react-query"
-import { Task } from "../../types/Task"
+import type { Task } from "../../types/Task"
 
 function TaskPage() {
   const { id } = useParams()

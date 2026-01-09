@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material"
-import { Task } from "../../types/Task"
+import type { Task } from "../../types/Task"
 import TaskCard from "../TaskCard/TaskCard"
 
 type Props = {
